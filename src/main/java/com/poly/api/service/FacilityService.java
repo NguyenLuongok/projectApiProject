@@ -10,7 +10,7 @@ import java.util.List;
  * @project PolyProjectApi
  */
 public interface FacilityService {
-    List<Facility> findAll();
+    List<FacilityDto> findAll();
 
     FacilityDto findById(int id);
 

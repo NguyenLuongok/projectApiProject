@@ -12,7 +12,7 @@ import java.util.List;
  * @project PolyProjectApi
  */
 public interface NationService {
-    List<Nation> findAll();
+    List<NationDto> findAll();
 
     NationDto findById(int id);
 

@@ -23,10 +23,17 @@ public class FacilityServiceImpl implements FacilityService {
     ModelMapper modelMapper;
 
     @Override
-    public List<Facility> findAll() {
-        List<Facility> facilities = new ArrayList<>();
-        facilityRepository.findAll().forEach(facilities::add);
-        return facilities;
+    public List<FacilityDto> findAll() {
+        List<Facility> facilities = facilityRepository.findAll();
+        List<FacilityDto> facilityDtos = new ArrayList<>();
+        if (facilities != null) {
+            for (Facility facility : facilities) {
+                FacilityDto facilityDto = new FacilityDto(facility.getFacilityId(), facility.getFacilityName());
+                facilityDtos.add(facilityDto);
+            }
+            return facilityDtos;
+        }
+        return null;
     }
 
     @Override

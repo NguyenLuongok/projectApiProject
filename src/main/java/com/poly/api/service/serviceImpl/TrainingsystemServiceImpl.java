@@ -25,10 +25,18 @@ public class    TrainingsystemServiceImpl implements TrainingsystemService {
     ModelMapper modelMapper;
 
     @Override
-    public List<Trainingsystem> findAll() {
-        List<Trainingsystem> trainingsystems = new ArrayList<>();
-        trainingsystemRepository.findAll().forEach(trainingsystems::add);
-        return trainingsystems;
+    public List<TrainingsystemDto> findAll() {
+        List<Trainingsystem> trainingsystems = trainingsystemRepository.findAll();
+        List<TrainingsystemDto> trainingsystemDtos = new ArrayList<>();
+        if (trainingsystems != null) {
+            for (Trainingsystem trainingsystem : trainingsystems) {
+                TrainingsystemDto trainingsystemDto = new TrainingsystemDto(trainingsystem.getTrainingSystemId(), trainingsystem.getTrainingSystemName());
+                trainingsystemDtos.add(trainingsystemDto);
+
+            }
+            return trainingsystemDtos;
+        }
+        return null;
     }
 
     @Override

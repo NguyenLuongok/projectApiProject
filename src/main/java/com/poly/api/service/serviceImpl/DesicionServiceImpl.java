@@ -25,32 +25,39 @@ public class DesicionServiceImpl implements DesicionService {
     private DesicionRepositoryImpl desicionRepositoryImpl;
 
     @Override
-    public List<Desicion> findAll() {
-        List<Desicion> desicions = new ArrayList<>();
-        desicionRepository.findAll().forEach(desicions::add);
-        return desicions;
+    public List<DesicionDto> findAll() {
+        List<Desicion> desicions = desicionRepository.findAll();
+        List<DesicionDto> desicionDtos = new ArrayList<>();
+        if (desicions != null) {
+            for (Desicion desicion : desicions) {
+                DesicionDto desicionDto = new DesicionDto(desicion.getDecisionId(), desicion.getDecisionName());
+                desicionDtos.add(desicionDto);
+            }
+            return desicionDtos;
+        }
+        return null;
     }
 
     @Override
     public DesicionDto findById(int id) {
         Desicion desicion = desicionRepository.findById(id).get();
         DesicionDto desicionDto = null;
-        if(desicion != null){
-            desicionDto = modelMapper.map(desicion,DesicionDto.class);
+        if (desicion != null) {
+            desicionDto = modelMapper.map(desicion, DesicionDto.class);
         }
         return desicionDto;
     }
 
     @Override
     public DesicionDto save(DesicionDto desicionDto) {
-        Desicion desicion = modelMapper.map(desicionDto,Desicion.class);
+        Desicion desicion = modelMapper.map(desicionDto, Desicion.class);
         desicionRepositoryImpl.save(desicion);
         return desicionDto;
     }
 
     @Override
     public DesicionDto update(DesicionDto desicionDto) {
-        Desicion desicion = modelMapper.map(desicionDto,Desicion.class);
+        Desicion desicion = modelMapper.map(desicionDto, Desicion.class);
         desicion.setDecisionId(desicionDto.getDecisionId());
         desicionRepository.save(desicion);
         return desicionDto;

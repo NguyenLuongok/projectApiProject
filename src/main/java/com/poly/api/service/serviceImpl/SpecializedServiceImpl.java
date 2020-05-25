@@ -25,10 +25,17 @@ public class SpecializedServiceImpl implements SpecializedService {
 
     //Bang nay khong chuyen sang dto
     @Override
-    public List<Specialized> findAll() {
-        List<Specialized> specializeds = new ArrayList<>();
-        specializedRepository.findAll().forEach(specializeds::add);
-        return specializeds;
+    public List<SpecializedDto> findAll() {
+        List<Specialized> specializeds = specializedRepository.findAll();
+        List<SpecializedDto> specializedDtos = new ArrayList<>();
+        if (specializeds != null) {
+            for (Specialized specialized : specializeds) {
+                SpecializedDto specializedDto = new SpecializedDto(specialized.getSpecializedId(), specialized.getSpecializedName());
+                specializedDtos.add(specializedDto);
+            }
+            return specializedDtos;
+        }
+        return null;
     }
 
     @Override

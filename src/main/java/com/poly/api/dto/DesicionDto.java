@@ -14,6 +14,11 @@ public class DesicionDto {
     public DesicionDto() {
     }
 
+    public DesicionDto(int decisionId, String decisionName) {
+        this.decisionId = decisionId;
+        this.decisionName = decisionName;
+    }
+
     public DesicionDto(String decisionName) {
         this.decisionName = decisionName;
     }
