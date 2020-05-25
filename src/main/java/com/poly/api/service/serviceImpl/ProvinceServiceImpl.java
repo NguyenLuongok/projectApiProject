@@ -23,10 +23,18 @@ public class ProvinceServiceImpl implements ProvinceService {
     ModelMapper modelMapper;
 
     @Override
-    public List<Province> findAll() {
-        List<Province> provinces = new ArrayList<>();
-        provinceRepository.findAll().forEach(provinces::add);
-        return provinces;
+    public List<ProvinceDto> findAll() {
+        List<Province> provinces = provinceRepository.findAll();
+        List<ProvinceDto> provinceDtos = new ArrayList<>();
+        if (provinces != null) {
+            for (Province province : provinces) {
+                ProvinceDto provinceDto = new ProvinceDto(province.getProvinceId(), province.getProvinceName());
+                provinceDtos.add(provinceDto);
+            }
+            return provinceDtos;
+        }
+
+        return null;
     }
 
     @Override

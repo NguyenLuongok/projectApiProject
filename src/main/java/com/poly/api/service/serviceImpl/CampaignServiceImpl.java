@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * @author Tong Duy Hai on 05/24/2020.
  * @created 24/05/2020
@@ -24,10 +25,18 @@ public class CampaignServiceImpl implements CampaignService {
     ModelMapper modelMapper;
 
     @Override
-    public List<Campaign> findAll() {
-        List<Campaign> campaigns = new ArrayList<>();
-        campaignRepository.findAll().forEach(campaigns::add);
-        return campaigns;
+    public List<CampaignDto> findAll() {
+        List<Campaign> campaigns = campaignRepository.findAll();
+        List<CampaignDto> campaignDtos = new ArrayList<>();
+        if (campaigns != null) {
+            for (Campaign campaign : campaigns) {
+                CampaignDto campaignDto = new CampaignDto(campaign.getCampaignId(), campaign.getCampaignName());
+                campaignDtos.add(campaignDto);
+
+            }
+            return campaignDtos;
+        }
+        return null;
     }
 
     @Override

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * @author Tong Duy Hai on 05/24/2020.
  * @created 24/05/2020
@@ -23,10 +24,17 @@ public class NationServiceImpl implements NationService {
     ModelMapper modelMapper;
 
     @Override
-    public List<Nation> findAll() {
-        List<Nation> nations = new ArrayList<>();
-        nationRepository.findAll().forEach(nations::add);
-        return nations;
+    public List<NationDto> findAll() {
+        List<Nation> nations = nationRepository.findAll();
+        List<NationDto> nationDtos = new ArrayList<>();
+        if (nations != null) {
+            for (Nation nation : nations) {
+                NationDto nationDto = new NationDto(nation.getNationId(), nation.getNationName());
+                nationDtos.add(nationDto);
+            }
+            return nationDtos;
+        }
+        return null;
     }
 
     @Override

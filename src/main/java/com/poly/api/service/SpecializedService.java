@@ -10,7 +10,7 @@ import java.util.List;
  * @project PolyProjectApi
  */
 public interface SpecializedService {
-    List<Specialized> findAll();
+    List<SpecializedDto> findAll();
 
     SpecializedDto findById(int id);
 

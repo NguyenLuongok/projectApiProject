@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DesicionService {
 
-    List<Desicion> findAll();
+    List<DesicionDto> findAll();
 
     DesicionDto findById(int id);
 

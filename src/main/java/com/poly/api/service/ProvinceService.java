@@ -11,7 +11,7 @@ import java.util.List;
  * @project PolyProjectApi
  */
 public interface ProvinceService {
-    List<Province> findAll();
+    List<ProvinceDto> findAll();
 
     ProvinceDto findById(int id);
 

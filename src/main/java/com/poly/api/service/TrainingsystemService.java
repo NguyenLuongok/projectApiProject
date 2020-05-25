@@ -13,7 +13,7 @@ import java.util.List;
  * @project PolyProjectApi
  */
 public interface TrainingsystemService {
-    List<Trainingsystem> findAll();
+    List<TrainingsystemDto> findAll();
 
     TrainingsystemDto findById(int id);
 
